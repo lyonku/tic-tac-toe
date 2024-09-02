@@ -1,0 +1,60 @@
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.board__table {
+  padding: 1.25rem;
+  border-collapse: collapse;
+  border: 3px solid rgba(0, 0, 0, 0);
+}
+
+.board-row {
+}
+
+.square {
+  text-align: center;
+  width: 6rem;
+  height: 6rem;
+
+  border: 2px solid #646669;
+  transition: 0.2s background-color;
+  font-size: 3rem;
+}
+
+/* .highlighted {
+  background-color: #268f1160;
+} */
+
+.score-bar {
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  border-spacing: 10px;
+}
+
+.score-bar__cell {
+  padding: 10px 20px;
+  border: 1px solid #646669;
+  border-radius: 8px;
+  transition: 0.2s border;
+}
+
+.score-bar__cell-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.score-bar__cell.active {
+  border: 1px solid #21cc99;
+}

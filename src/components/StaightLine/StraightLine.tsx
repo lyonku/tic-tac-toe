@@ -19,6 +19,7 @@ const StraightLine: FC<StraightLineProps> = () => {
     } else {
       setCloseLine(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [winner]);
 
   return (

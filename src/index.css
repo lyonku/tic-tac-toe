@@ -14,3 +14,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+#root {
+  display: flex;
+  justify-content: center;
+}
+
+/* width */
+*::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+*::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+*::-webkit-scrollbar-thumb {
+  background: #e2b714;
+  border-radius: 2px;
+}

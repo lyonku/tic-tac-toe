@@ -1,6 +1,22 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 
-function ZeroSVG(props: React.SVGProps<SVGSVGElement>) {
+interface ZeroSVGProps extends React.SVGProps<SVGSVGElement> {
+  animate?: boolean;
+}
+
+function ZeroSVG({ animate, ...props }: ZeroSVGProps) {
+  const circumference = 2 * Math.PI * 66.37;
+  const [offset, setOffset] = useState(circumference);
+
+  useEffect(() => {
+    if (animate) {
+      setOffset(0);
+    } else {
+      setOffset(circumference);
+    }
+  }, [animate, circumference]);
+
   return (
     <svg viewBox="0 0 164 164" width="1em" height="1em" {...props}>
       <circle
@@ -12,6 +28,13 @@ function ZeroSVG(props: React.SVGProps<SVGSVGElement>) {
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={31.25}
+        strokeDasharray={animate ? circumference : 0}
+        strokeDashoffset={offset}
+        style={{
+          transition: animate
+            ? "stroke-dashoffset 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
+            : "none",
+        }}
       />
     </svg>
   );

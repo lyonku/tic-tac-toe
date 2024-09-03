@@ -1,55 +1,43 @@
 import Board from "components/Board";
-import "./Game.css";
-import { useState } from "react";
+import "./Game.scss";
 import Steps from "components/Steps";
-import { calculateWinner } from "helpers";
 import ScoreBar from "components/ScoreBar";
 import Status from "components/Status";
+import { restartGame } from "useStore";
+import { useState } from "react";
+import StrikeLine from "components/StikeLine";
 
 function Game() {
-  const [history, setHistory] = useState([Array(9).fill(null)]);
-  const [currentMove, setCurrentMove] = useState(0);
-  const [score, setScore] = useState({ X: 0, O: 0 });
-  const currentSquares = history[currentMove];
-  const playerStep = currentMove % 2 === 0 ? "X" : "O";
+  const [isHistoryOpen, setHistoryOpen] = useState(false);
 
-  function handlePlay(nextSquares: any) {
-    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
-    const [winner, winline] = calculateWinner(nextSquares);
-
-    setHistory(nextHistory);
-    setCurrentMove(nextHistory.length - 1);
-  }
-
-  function jumpTo(nextMove: number) {
-    setCurrentMove(nextMove);
-  }
+  const handleHistoryOpen = () => {
+    setHistoryOpen((prev) => !prev);
+  };
 
   return (
     <div className="game">
-      <header className="header">
-        <h1>Крестики нолики</h1>
-        <ScoreBar
-          playerStep={playerStep}
-          squares={currentSquares}
-          score={score}
-        />
-        <Status
-          playerStep={playerStep}
-          squares={currentSquares}
-          currentMove={currentMove}
-        />
-      </header>
-      <main className="board">
-        <Board
-          playerStep={playerStep}
-          squares={currentSquares}
-          onPlay={handlePlay}
-        />
-      </main>
-      {/* <div className="game-info">
-        <Steps history={history} jumpTo={jumpTo} />
-      </div> */}
+      <div className="game__wrap">
+        <header className="header">
+          <h1>Крестики нолики</h1>
+          <ScoreBar />
+          <Status />
+        </header>
+        <main className="board">
+          <Board />
+          <StrikeLine />
+        </main>
+        <div className="controls">
+          <button className="game__btn" onClick={restartGame}>
+            Начать заново
+          </button>
+          <button className="game__btn" onClick={handleHistoryOpen}>
+            История
+          </button>
+        </div>
+      </div>
+      <div className={`steps ${isHistoryOpen ? "active" : ""}`}>
+        <Steps />
+      </div>
     </div>
   );
 }

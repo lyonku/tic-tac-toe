@@ -1,21 +1,23 @@
-import { calculateWinner } from "helpers";
 import { FC } from "react";
+import {
+  useGameCurrentMove,
+  useGameCurrentPlayer,
+  useGameWinner,
+} from "useStore";
 
-interface StatusProps {
-  squares: any[];
-  playerStep: "X" | "O";
-  currentMove: number;
-}
+interface StatusProps {}
 
-const Status: FC<StatusProps> = ({ squares, playerStep, currentMove }) => {
-  const [winner, winline] = calculateWinner(squares);
+const Status: FC<StatusProps> = () => {
+  const currentPlayer = useGameCurrentPlayer();
+  const currentMove = useGameCurrentMove();
+  const winner = useGameWinner();
 
   let status = "Начните игру или выберите игрока";
 
   if (winner) {
     status = "Выйграл: " + winner;
   } else {
-    status = "Ходит: " + playerStep;
+    status = "Ходит: " + currentPlayer;
   }
 
   if (!winner && currentMove === 9) {

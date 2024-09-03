@@ -1,24 +1,32 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import Square from "./Square";
-import { calculateWinner } from "helpers";
+import {
+  handlePlay,
+  restartGame,
+  useGameCurrentPlayer,
+  useGameCurrentSquares,
+  useGameWinner,
+} from "useStore";
 
-interface BoardProps {
-  playerStep: "X" | "O";
-  squares: any[];
-  onPlay: (nextSquares: any[]) => void;
-}
+interface BoardProps {}
 
-const Board: FC<BoardProps> = ({ playerStep, squares, onPlay }) => {
-  const [winner, winline] = calculateWinner(squares);
+const Board: FC<BoardProps> = () => {
+  const squares = useGameCurrentSquares();
+  const currentPlayer = useGameCurrentPlayer();
+  const winner = useGameWinner();
+
   function handleClick(i: number) {
     if (squares[i] || winner) {
+      if (winner) {
+        restartGame();
+      }
       return;
     }
 
     const nextSquares = squares.slice();
-    nextSquares[i] = playerStep;
+    nextSquares[i] = currentPlayer;
 
-    onPlay(nextSquares);
+    handlePlay(nextSquares);
   }
 
   const boardElements = [
@@ -26,6 +34,7 @@ const Board: FC<BoardProps> = ({ playerStep, squares, onPlay }) => {
     [3, 4, 5],
     [6, 7, 8],
   ];
+  console.log(squares);
 
   return (
     <table className="board__table">
@@ -38,7 +47,6 @@ const Board: FC<BoardProps> = ({ playerStep, squares, onPlay }) => {
                   <Square
                     value={squares[element]}
                     onSquareClick={() => handleClick(element)}
-                    winSqure={winline?.includes(element)}
                     key={elementIndex}
                   />
                 );

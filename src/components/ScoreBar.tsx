@@ -1,16 +1,14 @@
 import { FC } from "react";
 import MemoCrossSVG from "./CrossSVG";
 import MemoZeroSVG from "./ZeroSVG";
-import { calculateWinner } from "helpers";
+import { useGameCurrentPlayer, useGameScore, useGameWinner } from "useStore";
 
-interface ScoreBarProps {
-  squares: any[];
-  playerStep: "X" | "O";
-  score: { X: number | null; O: number | null };
-}
+interface ScoreBarProps {}
 
-const ScoreBar: FC<ScoreBarProps> = ({ playerStep, squares, score }) => {
-  const [winner, winline] = calculateWinner(squares);
+const ScoreBar: FC<ScoreBarProps> = () => {
+  const currentPlayer = useGameCurrentPlayer();
+  const winner = useGameWinner();
+  const score = useGameScore();
 
   return (
     <table className="score-bar">
@@ -18,8 +16,8 @@ const ScoreBar: FC<ScoreBarProps> = ({ playerStep, squares, score }) => {
         <tr className="score-bar__row">
           <td
             className={`score-bar__cell ${
-              playerStep === "X" && !winner ? "active" : ""
-            }`}
+              currentPlayer === "X" && !winner ? "active" : ""
+            } ${winner === "X" ? "win" : ""}`}
           >
             <div className="score-bar__cell-wrap">
               <MemoCrossSVG />
@@ -28,8 +26,8 @@ const ScoreBar: FC<ScoreBarProps> = ({ playerStep, squares, score }) => {
           </td>
           <td
             className={`score-bar__cell ${
-              playerStep === "O" && !winner ? "active" : ""
-            }`}
+              currentPlayer === "O" && !winner ? "active" : ""
+            } ${winner === "O" ? "win" : ""}`}
           >
             <div className="score-bar__cell-wrap">
               <MemoZeroSVG />

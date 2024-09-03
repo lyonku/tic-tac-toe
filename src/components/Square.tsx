@@ -13,10 +13,10 @@ const Square: FC<SquareProps> = ({ value, onSquareClick, winSqure }) => {
 
   switch (value) {
     case "O":
-      element = <MemoZeroSVG />;
+      element = <MemoZeroSVG animate={true} />;
       break;
     case "X":
-      element = <MemoCrossSVG />;
+      element = <MemoCrossSVG animate={true} />;
       break;
     default:
       element = null;
@@ -28,7 +28,7 @@ const Square: FC<SquareProps> = ({ value, onSquareClick, winSqure }) => {
       className={`square ${winSqure ? "highlighted" : ""}`}
       onClick={onSquareClick}
     >
-      {element}
+      <div>{element}</div>
     </td>
   );
 };

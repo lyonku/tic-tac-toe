@@ -1,7 +1,7 @@
 type Square = "X" | "O";
-type NullableSquare = Square | null;
+type NullableSquare = Square | null | "XO";
 type WinLine = [number, number, number];
-type WinnerResult = [Square, WinLine] | [null];
+type WinnerResult = [Square | "XO", WinLine] | ["XO"] | [null];
 
 export function calculateWinner(squares: NullableSquare[]): WinnerResult {
   const winlines: WinLine[] = [
@@ -21,6 +21,10 @@ export function calculateWinner(squares: NullableSquare[]): WinnerResult {
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
       return [squares[a] as Square, winlines[i]];
     }
+  }
+  const hasNull = squares.includes(null);
+  if (!hasNull) {
+    return ["XO"];
   }
 
   return [null];

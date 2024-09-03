@@ -1,0 +1,139 @@
+.straight-line {
+  position: absolute;
+  border-radius: 4px;
+  z-index: -1;
+  transition: 0.2s opacity;
+
+  &.close {
+    opacity: 0 !important;
+  }
+
+  &.vertical-left,
+  &.vertical-center,
+  &.vertical-right {
+    top: 0;
+    width: 8px;
+    height: 0%;
+  }
+
+  &.vertical {
+    &-left {
+      left: 48px;
+    }
+
+    &-right {
+      right: 48px;
+    }
+
+    &-center {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  &.horizontal-top,
+  &.horizontal-center,
+  &.horizontal-bottom {
+    width: 0%;
+    height: 8px;
+  }
+
+  &.horizontal {
+    &-bottom {
+      bottom: 48px;
+    }
+
+    &-top {
+      top: 48px;
+    }
+
+    &-center {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  &.diagonal-toRight,
+  &.diagonal-toLeft {
+    width: 0;
+    height: 9px;
+  }
+
+  &.diagonal {
+    &-toRight {
+      top: 0;
+
+      left: 0;
+      transform: rotate(45deg);
+      transform-origin: 6px 0;
+    }
+
+    &-toLeft {
+      top: 0;
+
+      right: 0;
+      transform: rotate(-45deg);
+      transform-origin: calc(100% - 4px) 5px;
+    }
+  }
+
+  &.start {
+    z-index: 1;
+    opacity: 1;
+
+    &.vertical-left,
+    &.vertical-center,
+    &.vertical-right {
+      animation: straight-vertical 0.5s;
+      animation-fill-mode: forwards;
+      animation-delay: 0.3s;
+    }
+
+    &.horizontal-top,
+    &.horizontal-center,
+    &.horizontal-bottom {
+      animation: straight-horizontal 0.5s;
+      animation-fill-mode: forwards;
+      animation-delay: 0.3s;
+    }
+
+    &.diagonal-toRight {
+      animation: straight-diagonal 0.5s;
+      animation-fill-mode: forwards;
+      animation-delay: 0.3s;
+    }
+
+    &.diagonal-toLeft {
+      animation: straight-diagonal 0.5s;
+      animation-fill-mode: forwards;
+      animation-delay: 0.3s;
+    }
+  }
+}
+
+@keyframes straight-horizontal {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes straight-vertical {
+  0% {
+    height: 0%;
+  }
+  100% {
+    height: 100%;
+  }
+}
+
+@keyframes straight-diagonal {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 140%;
+  }
+}

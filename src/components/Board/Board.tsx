@@ -1,5 +1,4 @@
 import { FC } from "react";
-import Square from "./Square";
 import {
   handlePlay,
   restartGame,
@@ -7,6 +6,8 @@ import {
   useGameCurrentSquares,
   useGameWinner,
 } from "useStore";
+import Square from "./components/Square";
+import "./Board.scss";
 
 interface BoardProps {}
 
@@ -34,7 +35,6 @@ const Board: FC<BoardProps> = () => {
     [3, 4, 5],
     [6, 7, 8],
   ];
-  console.log(squares);
 
   return (
     <table className="board__table">
@@ -47,6 +47,7 @@ const Board: FC<BoardProps> = () => {
                   <Square
                     value={squares[element]}
                     onSquareClick={() => handleClick(element)}
+                    element={element}
                     key={elementIndex}
                   />
                 );

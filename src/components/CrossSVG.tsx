@@ -19,13 +19,7 @@ function CrossSVG({ animate, ...props }: CrossSVGProps) {
   }, [animate, lineLength]);
 
   return (
-    <svg
-      viewBox="0 0 158.34 158.34"
-      width="1em"
-      height="1em"
-      {...props}
-      style={{ rotate: "-90deg" }}
-    >
+    <svg viewBox="0 0 158.34 158.34" width="1em" height="1em" {...props}>
       <defs>
         <style>
           {`

@@ -5,7 +5,8 @@ import ScoreBar from "components/ScoreBar";
 import Status from "components/Status";
 import { restartGame } from "useStore";
 import { useState } from "react";
-import StrikeLine from "components/StikeLine";
+import Results from "components/Results";
+import StraightLine from "components/StaightLine";
 
 function Game() {
   const [isHistoryOpen, setHistoryOpen] = useState(false);
@@ -24,7 +25,8 @@ function Game() {
         </header>
         <main className="board">
           <Board />
-          <StrikeLine />
+          <StraightLine />
+          <Results />
         </main>
         <div className="controls">
           <button className="game__btn" onClick={restartGame}>

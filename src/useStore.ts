@@ -6,7 +6,7 @@ interface GameStoreTypes {
   history: Array<(null | "X" | "O")[]>;
   score: { X: number; O: number };
   currentMove: number;
-  winner: null | "O" | "X";
+  winner: null | "O" | "X" | "XO";
   winline: any[];
 }
 
@@ -45,9 +45,10 @@ export const handlePlay = (nextSquares: any[]) => {
     (state) => ({
       history: nextHistory,
       currentMove: nextHistory.length - 1,
-      score: winner
-        ? { ...state.score, [winner]: state.score[winner] + 1 }
-        : state.score,
+      score:
+        winner && winner !== "XO"
+          ? { ...state.score, [winner]: state.score[winner] + 1 }
+          : state.score,
       winner,
       winline: winner ? winline : [],
     }),

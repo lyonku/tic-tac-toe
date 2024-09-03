@@ -1,0 +1,231 @@
+.board {
+  position: relative;
+
+  &__table {
+    padding: 1.25rem;
+    border-collapse: collapse;
+    border: 3px solid rgba(0, 0, 0, 0);
+  }
+}
+
+.square {
+  text-align: center;
+  width: 6rem;
+  height: 6rem;
+
+  border: 2px solid #646669;
+  transition: 0.2s background-color;
+  font-size: 3rem;
+
+  div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  svg {
+    rotate: -90deg;
+    transition: transform 0.5s ease, opacity 0.5s;
+  }
+}
+
+.win-square {
+  position: absolute;
+
+  &.top-center,
+  &.center-center,
+  &.bottom-center,
+  &.center-left,
+  &.center-right {
+    z-index: 2;
+  }
+
+  &.horizontal-top {
+    &.top-center {
+      transform: translateX(-100px);
+      animation: scale-top-center 0.4s;
+      animation-delay: 0.4s;
+      animation-fill-mode: forwards;
+    }
+
+    &.top-left {
+      transform: translate(-100px, 100px);
+      opacity: 0;
+    }
+
+    &.top-right {
+      transform: translate(-100px, -100px);
+      opacity: 0;
+    }
+  }
+
+  &.horizontal-center {
+    &.center-center {
+      transform: translateX(00px);
+      animation: scale-center 0.4s;
+      animation-delay: 0.4s;
+      animation-fill-mode: forwards;
+    }
+
+    &.center-left {
+      transform: translate(0, 100px);
+      opacity: 0;
+    }
+
+    &.center-right {
+      transform: translate(0, -100px);
+      opacity: 0;
+    }
+  }
+
+  &.horizontal-bottom {
+    &.bottom-center {
+      transform: translateX(100px);
+      animation: scale-bottom-center 0.4s;
+      animation-delay: 0.4s;
+      animation-fill-mode: forwards;
+    }
+
+    &.bottom-left {
+      transform: translate(100px, 100px);
+      opacity: 0;
+    }
+
+    &.bottom-right {
+      transform: translate(100px, -100px);
+      opacity: 0;
+    }
+  }
+
+  &.vertical-left {
+    &.center-left {
+      transform: translateY(100px);
+      animation: scale-left-center 0.4s;
+      animation-delay: 0.4s;
+      animation-fill-mode: forwards;
+    }
+
+    &.top-left {
+      transform: translate(-100px, 100px);
+      opacity: 0;
+    }
+
+    &.bottom-left {
+      transform: translate(100px, 100px);
+      opacity: 0;
+    }
+  }
+
+  &.vertical-center {
+    &.center-center {
+      transform: translateY(0px);
+      animation: scale-center 0.4s;
+      animation-delay: 0.4s;
+      animation-fill-mode: forwards;
+    }
+
+    &.top-center {
+      transform: translate(-100px, 0px);
+      opacity: 0;
+    }
+
+    &.bottom-center {
+      transform: translate(100px, 0px);
+      opacity: 0;
+    }
+  }
+
+  &.vertical-right {
+    &.center-right {
+      transform: translateY(-100px);
+      animation: scale-right-center 0.4s;
+      animation-delay: 0.4s;
+      animation-fill-mode: forwards;
+    }
+
+    &.top-right {
+      transform: translate(-100px, -100px);
+      opacity: 0;
+    }
+
+    &.bottom-right {
+      transform: translate(100px, -100px);
+      opacity: 0;
+    }
+  }
+
+  &.diagonal-toRight {
+    &.center-center {
+      transform: translateY(0px);
+      animation: scale-center 0.4s;
+      animation-delay: 0.4s;
+      animation-fill-mode: forwards;
+    }
+
+    &.top-left {
+      transform: translate(-100px, 100px);
+      opacity: 0;
+    }
+
+    &.bottom-right {
+      transform: translate(100px, -100px);
+      opacity: 0;
+    }
+  }
+
+  &.diagonal-toLeft {
+    &.center-center {
+      transform: translateY(0px);
+      animation: scale-center 0.4s;
+      animation-delay: 0.4s;
+      animation-fill-mode: forwards;
+    }
+
+    &.top-right {
+      transform: translate(-100px, -100px);
+      opacity: 0;
+    }
+
+    &.bottom-left {
+      transform: translate(100px, 100px);
+      opacity: 0;
+    }
+  }
+}
+
+@keyframes scale-center {
+  to {
+    scale: 2;
+    translate: 0 -50px;
+  }
+}
+
+@keyframes scale-top-center {
+  to {
+    scale: 2;
+    translate: 0 -150px;
+  }
+}
+
+@keyframes scale-bottom-center {
+  to {
+    scale: 2;
+    translate: 0 50px;
+  }
+}
+
+@keyframes scale-left-center {
+  to {
+    scale: 2;
+    translate: -100px -50px;
+  }
+}
+
+@keyframes scale-right-center {
+  to {
+    scale: 2;
+    translate: 100px -50px;
+  }
+}

@@ -200,10 +200,16 @@
     align-items: center;
     margin-right: 0;
   }
+
   .steps {
-    bottom: 0;
     right: unset;
+    width: 90%;
+    max-width: 300px;
+    box-sizing: border-box;
+    max-height: none;
+    margin-bottom: 20px;
   }
+
   .steps.active {
     transform: translateX(0%) translateY(110%);
   }

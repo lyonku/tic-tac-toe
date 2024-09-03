@@ -1,10 +1,10 @@
+import { useState } from "react";
 import Board from "components/Board";
 import "./Game.scss";
 import Steps from "components/Steps";
 import ScoreBar from "components/ScoreBar";
 import Status from "components/Status";
 import { restartGame } from "useStore";
-import { useState } from "react";
 import Results from "components/Results";
 import StraightLine from "components/StaightLine";
 

@@ -6,7 +6,8 @@ import MemoZeroSVG from "./ZeroSVG";
 interface ResultsProps {}
 
 const Results: FC<ResultsProps> = () => {
-  const winner = useGameWinner();
+  const { winner } = useGameWinner();
+
   const isDraw = winner === "XO";
   let text = "Победитель!";
 

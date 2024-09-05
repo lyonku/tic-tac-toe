@@ -1,21 +1,24 @@
 import { FC } from "react";
-import { useGameCurrentPlayer, useGameWinner } from "useStore";
+import { useGameCurrent, useGameWinner } from "useStore";
 
 interface StatusProps {}
 
 const Status: FC<StatusProps> = () => {
-  const currentPlayer = useGameCurrentPlayer();
-  const winner = useGameWinner();
+  const { currentPlayer, currentMove } = useGameCurrent();
+  const { winner } = useGameWinner();
+  const isFirstMove = currentMove === 0;
 
   let status = "Начните игру или выберите игрока";
 
   if (winner) {
     status = "Игра окончена";
-  } else {
+  }
+
+  if (!winner && !isFirstMove) {
     status = "Ходит: " + currentPlayer;
   }
 
-  return <div className="status">{status}</div>;
+  return <p className="status">{status}</p>;
 };
 
 export default Status;

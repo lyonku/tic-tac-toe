@@ -1,13 +1,12 @@
 import { FC, useEffect, useState } from "react";
-import { useGameWinline, useGameWinner } from "useStore";
+import { useGameWinner } from "useStore";
 import "./StraightLine.scss";
 import { positions } from "Constants";
 
 interface StraightLineProps {}
 
 const StraightLine: FC<StraightLineProps> = () => {
-  const winner = useGameWinner();
-  const winline = useGameWinline();
+  const { winner, winline } = useGameWinner();
   const [closeLine, setCloseLine] = useState(false);
   const isDraw = winner === "XO";
 

@@ -1,9 +1,9 @@
 import { FC, useState } from "react";
 
-import { useGameWinline } from "useStore";
 import { location, positions } from "Constants";
 import MemoZeroSVG from "components/ZeroSVG";
 import MemoCrossSVG from "components/CrossSVG";
+import { useGameWinner } from "useStore";
 
 interface SquareProps {
   value: string | null | number;
@@ -12,7 +12,7 @@ interface SquareProps {
 }
 
 const Square: FC<SquareProps> = ({ value, onSquareClick, element }) => {
-  const winline = useGameWinline();
+  const { winline } = useGameWinner();
   const winSquare = winline?.includes(element);
   const [positionClass, setPositionClass] = useState("");
 
@@ -54,7 +54,7 @@ const Square: FC<SquareProps> = ({ value, onSquareClick, element }) => {
 
   return (
     <td className={`square`} onClick={onSquareClick}>
-      <div>{component}</div>
+      <button>{component}</button>
     </td>
   );
 };

@@ -2,8 +2,7 @@ import { FC } from "react";
 import {
   handlePlay,
   restartGame,
-  useGameCurrentPlayer,
-  useGameCurrentSquares,
+  useGameCurrent,
   useGameWinner,
 } from "useStore";
 import Square from "./components/Square";
@@ -12,20 +11,16 @@ import "./Board.scss";
 interface BoardProps {}
 
 const Board: FC<BoardProps> = () => {
-  const squares = useGameCurrentSquares();
-  const currentPlayer = useGameCurrentPlayer();
-  const winner = useGameWinner();
+  const { squares, currentPlayer } = useGameCurrent();
+  const { winner } = useGameWinner();
 
   function handleClick(i: number) {
     if (squares[i] || winner) {
-      if (winner) {
-        restartGame();
-      }
       return;
     }
 
     const nextSquares = squares.slice();
-    nextSquares[i] = currentPlayer;
+    nextSquares[i] = currentPlayer as "X" | "O" | null;
 
     handlePlay(nextSquares);
   }

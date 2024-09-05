@@ -1,6 +1,7 @@
 .game {
   position: relative;
-  max-width: max-content;
+  display: flex;
+  align-items: center;
 
   &__wrap {
     position: relative;
@@ -14,14 +15,14 @@
     z-index: 3;
   }
 
-  &__btn {
+  button {
     cursor: pointer;
-    padding: 10px;
-    border-radius: 8px;
+    padding: 0.625rem;
+    border-radius: 0.5rem;
     background-color: unset;
     border: 1px solid #646669;
     color: #d1d0c5;
-    font-size: 18px;
+    font-size: 1.125rem;
 
     transition: 0.2s border;
 
@@ -30,9 +31,8 @@
     }
   }
 
-  .controls {
-    display: flex;
-    gap: 20px;
+  .status {
+    text-align: center;
   }
 }
 
@@ -40,33 +40,56 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1.25rem;
 
   .score-bar {
-    text-align: center;
-    max-width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
     width: 100%;
-    border-spacing: 10px;
     font-weight: 500;
+    font-size: 1.125rem;
 
     &__cell {
-      padding: 10px 20px;
+      position: relative;
+      cursor: pointer;
+
+      width: 100%;
+      padding: 0.5rem 1rem;
       border: 1px solid #646669;
-      border-radius: 8px;
+      border-radius: 0.5rem;
       transition: 0.2s border, 0.2s box-shadow;
 
-      &-wrap {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
       &.active {
-        border: 1px solid #d1d0c5;
-        box-shadow: 4px 4px 22px 0px rgba(0, 0, 0, 0.2);
+        border: 1px solid #e2b714;
+        box-shadow: 0.25rem 0.25rem 1.375rem 0px rgba(0, 0, 0, 0.2);
       }
 
       &.win {
         animation: winner 1s;
+      }
+
+      svg {
+        min-width: 25px;
+      }
+    }
+
+    &__winner {
+      opacity: 0;
+      width: 3.125rem;
+      position: absolute;
+      top: -100%;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: 0.3s opacity;
+
+      &.active {
+        opacity: 1;
       }
     }
   }
@@ -74,13 +97,11 @@
   @keyframes winner {
     0%,
     100% {
-      scale: 1;
-      rotate: 0deg;
       border: 1px solid #646669;
     }
     50% {
       scale: 1.1;
-      border: 2px solid #4f9725;
+      border: 1px solid #4f9725;
     }
   }
 }
@@ -103,7 +124,7 @@
   &.draw {
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 1.25rem;
   }
 
   &.active {
@@ -129,8 +150,8 @@
 
   &__draw {
     svg {
-      width: 100px;
-      height: 100px;
+      width: 6.25rem;
+      height: 6.25rem;
     }
   }
 
@@ -141,55 +162,15 @@
   }
 }
 
-.steps {
-  padding: 10px 16px;
-  border-radius: 8px;
-  border: 1px solid #646669;
-  max-height: 25rem;
-  overflow: auto;
-
-  top: 60%;
-  right: 0;
-
-  position: absolute;
-  transform: translateX(0px) translateY(-50%);
-
-  transition: 0.2s all;
-
-  h2 {
-    margin-top: 0;
-  }
-
-  &__list {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  &__item {
-    list-style: none;
-    cursor: pointer;
-
-    &-move {
-      text-decoration: none;
-    }
-
-    &-description {
-      text-decoration: underline;
-    }
-  }
-
-  &.active {
-    transform: translateX(150%) translateY(-50%);
-    z-index: 2;
+@media screen and (max-width: 1200px) {
+  .game {
+    margin-right: 20%;
   }
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1000px) {
   .game {
-    margin-right: 20%;
+    margin-right: 0;
   }
 }
 
@@ -199,18 +180,5 @@
     justify-content: center;
     align-items: center;
     margin-right: 0;
-  }
-
-  .steps {
-    right: unset;
-    width: 90%;
-    max-width: 300px;
-    box-sizing: border-box;
-    max-height: none;
-    margin-bottom: 20px;
-  }
-
-  .steps.active {
-    transform: translateX(0%) translateY(110%);
   }
 }

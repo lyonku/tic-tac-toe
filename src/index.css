@@ -16,9 +16,18 @@ code {
     monospace;
 }
 
+html {
+  font-size: clamp(16px, 8px + 1vw, 20px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
 #root {
   display: flex;
   justify-content: center;
+  padding: 20px;
 }
 
 /* width */

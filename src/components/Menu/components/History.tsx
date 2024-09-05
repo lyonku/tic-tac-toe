@@ -1,15 +1,15 @@
 import { FC } from "react";
 import { jumpTo, useGameHistory } from "useStore";
 
-interface StepsProps {}
+interface HistoryProps {}
 
-const Steps: FC<StepsProps> = () => {
+const History: FC<HistoryProps> = () => {
   const history = useGameHistory();
 
   return (
-    <>
+    <div className="history">
       <h2>История шагов</h2>
-      <ol className="steps__list">
+      <ol className="history__list">
         {history.map((squares: any[], move: number) => {
           let description;
 
@@ -20,17 +20,21 @@ const Steps: FC<StepsProps> = () => {
           }
 
           return (
-            <li className="steps__item" key={move} onClick={() => jumpTo(move)}>
+            <li
+              className="history__item"
+              key={move}
+              onClick={() => jumpTo(move)}
+            >
               {move > 0 && (
-                <span className="steps__item-move">{`${move}. `}</span>
+                <span className="history__item-move">{`${move}. `}</span>
               )}
-              <span className="steps__item-description">{description}</span>
+              <span className="history__item-description">{description}</span>
             </li>
           );
         })}
       </ol>
-    </>
+    </div>
   );
 };
 
-export default Steps;
+export default History;

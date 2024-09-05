@@ -1,25 +1,20 @@
-import { useState } from "react";
 import Board from "components/Board";
-import "./Game.scss";
-import Steps from "components/Steps";
 import ScoreBar from "components/ScoreBar";
 import Status from "components/Status";
-import { restartGame } from "useStore";
 import Results from "components/Results";
 import StraightLine from "components/StaightLine";
 
+import "./Game.scss";
+import "./Normalize.css";
+import Menu from "components/Menu";
+import Controls from "components/Controls";
+
 function Game() {
-  const [isHistoryOpen, setHistoryOpen] = useState(false);
-
-  const handleHistoryOpen = () => {
-    setHistoryOpen((prev) => !prev);
-  };
-
   return (
     <div className="game">
       <div className="game__wrap">
         <header className="header">
-          <h1>Крестики нолики</h1>
+          <h1>Крестики-Нолики</h1>
           <ScoreBar />
           <Status />
         </header>
@@ -28,18 +23,9 @@ function Game() {
           <StraightLine />
           <Results />
         </main>
-        <div className="controls">
-          <button className="game__btn" onClick={restartGame}>
-            Начать заново
-          </button>
-          <button className="game__btn" onClick={handleHistoryOpen}>
-            История
-          </button>
-        </div>
+        <Controls />
       </div>
-      <div className={`steps ${isHistoryOpen ? "active" : ""}`}>
-        <Steps />
-      </div>
+      <Menu />
     </div>
   );
 }

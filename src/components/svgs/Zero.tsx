@@ -6,19 +6,34 @@ interface ZeroProps extends React.SVGProps<SVGSVGElement> {
 }
 
 function Zero({ animate, ...props }: ZeroProps) {
-  const circumference = 2 * Math.PI * 66.37;
-  const [offset, setOffset] = useState(circumference);
+  const circle = 2 * Math.PI * 66.37;
+  const [offset, setOffset] = useState(circle);
 
   useEffect(() => {
     if (animate) {
       setOffset(0);
     } else {
-      setOffset(circumference);
+      setOffset(circle);
     }
-  }, [animate, circumference]);
+  }, [animate, circle]);
 
   return (
     <svg viewBox="0 0 164 164" width="1em" height="1em" {...props}>
+      <style>
+        {`
+          @keyframes fillCircle {
+            from {
+              stroke-dashoffset: ${circle}px;
+            }
+            to {
+              stroke-dashoffset: 0;
+            }
+          }
+          .circle-animation {
+            animation: fillCircle 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+          }
+        `}
+      </style>
       <circle
         cx={82}
         cy={82}
@@ -28,13 +43,9 @@ function Zero({ animate, ...props }: ZeroProps) {
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={31.25}
-        strokeDasharray={animate ? circumference : 0}
-        strokeDashoffset={offset}
-        style={{
-          transition: animate
-            ? "stroke-dashoffset 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
-            : "none",
-        }}
+        strokeDasharray={circle}
+        strokeDashoffset={animate ? offset : 0}
+        className={animate ? "circle-animation" : ""}
       />
     </svg>
   );

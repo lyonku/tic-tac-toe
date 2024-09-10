@@ -61,7 +61,6 @@ function getStrike(board: NullableSquare[], player: Square) {
   }
   return null;
 }
-
 export function calculateBotEasyMove(
   squares: (null | "X" | "O")[],
   bot: Square
@@ -100,10 +99,74 @@ export function calculateBotMiddleMove(
   return nextSquares;
 }
 
-// export function calculateBotHardMove(
-//   squares: (null | "X" | "O")[],
-//   bot: Square
-// ) {
+export function calculateBotHardMove(
+  squares: (null | "X" | "O")[],
+  bot: Square,
+  currentMove: number
+) {
+  const nextSquares = squares.slice();
+  const player = bot === "O" ? "X" : "O";
 
-//   return nextSquares;
-// }
+  let index: number | null = 0;
+  index = getRandomMove(nextSquares);
+
+  // Если центр не занят, бот сразу его занимает
+  if (nextSquares[4] === null) {
+    index = 4;
+  }
+
+  // Если занята одна из центральных сторон, бот занимает соседнюю
+  if (currentMove === 1) {
+    let firstMovePlayer = nextSquares.findIndex((square) => square === player);
+
+    if (firstMovePlayer === 1) {
+      index = 2;
+    }
+
+    if (firstMovePlayer === 3) {
+      index = 6;
+    }
+
+    if (firstMovePlayer === 5 || firstMovePlayer === 7) {
+      index = 8;
+    }
+
+    if (firstMovePlayer === 4) {
+      const randomEven = Math.floor(Math.random() * 5) * 2;
+      index = randomEven !== 4 ? randomEven : 2;
+    }
+  }
+
+  if (
+    currentMove === 3 &&
+    nextSquares[4] === player &&
+    (nextSquares[0] === player ||
+      nextSquares[2] === player ||
+      nextSquares[6] === player ||
+      nextSquares[8] === player)
+  ) {
+    if (nextSquares[0] === null) {
+      index = 0;
+    } else if (nextSquares[2] === null) {
+      index = 2;
+    } else {
+      index = 8;
+    }
+  }
+
+  // Бот пытается заблокировать ход игрока.
+  let blockIndex = getStrike(nextSquares, player);
+  if (blockIndex !== null) {
+    index = blockIndex;
+  }
+
+  // Бот пытается выиграть, если есть возможность.
+  let winIndex = getStrike(nextSquares, bot);
+  if (winIndex !== null) {
+    index = winIndex;
+  }
+
+  nextSquares[index] = bot;
+
+  return nextSquares;
+}

@@ -71,3 +71,9 @@ button {
   background: #e2b714;
   border-radius: 2px;
 }
+
+@media screen and (max-width: 375px) {
+  html {
+    font-size: 18px;
+  }
+}

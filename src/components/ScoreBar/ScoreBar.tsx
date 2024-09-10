@@ -40,7 +40,6 @@ const ScoreBar: FC<ScoreBarProps> = () => {
           isXWin ? "win" : ""
         }`}
         onClick={() => handleChoosePlayer("X")}
-        disabled={isWithFriend}
       >
         <MemoCross />
         <span>{currentScoreX}</span>

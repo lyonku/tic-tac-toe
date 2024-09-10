@@ -54,6 +54,7 @@
 
 @media screen and (max-width: 900px) {
   .menu {
+    max-width: 17rem;
     top: 50%;
     left: 50%;
     z-index: 4;
@@ -61,17 +62,17 @@
     position: absolute;
     width: 100%;
     flex: unset;
-    transition: 0.4s opacity;
+    right: unset;
+    transition: 0.4s opacity, 0.4s scale;
+    transform: translate(-50%, -50%) !important;
 
     &.active {
       opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
     }
 
     &.disabled {
       z-index: -1;
       opacity: 0;
-      transform: translate(-50%, -50%) scale(0.6);
     }
 
     &__background {
@@ -82,6 +83,16 @@
       height: 100vh;
       backdrop-filter: blur(5px);
       background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    &__close-btn {
+      top: 10px;
+      right: 10px;
+
+      svg {
+        width: 40px;
+        height: 40px;
+      }
     }
   }
 }

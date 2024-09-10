@@ -8,12 +8,16 @@ import {
 import Square from "./components/Square";
 import "./Board.scss";
 import { useSettingsDifficulty, useSettingsMode } from "store/useSettingsStore";
-import { calculateBotEasyMove, calculateBotMiddleMove } from "helpers";
+import {
+  calculateBotEasyMove,
+  calculateBotHardMove,
+  calculateBotMiddleMove,
+} from "helpers";
 
 interface BoardProps {}
 
 const Board: FC<BoardProps> = () => {
-  const { squares, currentPlayer } = useGameCurrent();
+  const { squares, currentPlayer, currentMove } = useGameCurrent();
   const { winner } = useGameWinner();
   const player = useGamePlayer();
   const mode = useSettingsMode();
@@ -31,7 +35,7 @@ const Board: FC<BoardProps> = () => {
           nextSquares = calculateBotEasyMove(squares, bot);
           break;
         case "hard":
-          nextSquares = calculateBotEasyMove(squares, bot);
+          nextSquares = calculateBotHardMove(squares, bot, currentMove);
           break;
         default:
           nextSquares = calculateBotMiddleMove(squares, bot);

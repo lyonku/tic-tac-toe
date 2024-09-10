@@ -1,15 +1,56 @@
-import { FC } from "react";
-import { handlePlay, useGameCurrent, useGameWinner } from "useStore";
+import { FC, useEffect } from "react";
+import {
+  handlePlay,
+  useGameCurrent,
+  useGamePlayer,
+  useGameWinner,
+} from "store/useGameStore";
 import Square from "./components/Square";
 import "./Board.scss";
+import { useSettingsDifficulty, useSettingsMode } from "store/useSettingsStore";
+import { calculateBotEasyMove, calculateBotMiddleMove } from "helpers";
 
 interface BoardProps {}
 
 const Board: FC<BoardProps> = () => {
   const { squares, currentPlayer } = useGameCurrent();
   const { winner } = useGameWinner();
+  const player = useGamePlayer();
+  const mode = useSettingsMode();
+  const difficulty = useSettingsDifficulty();
+
+  const isBotMove = mode === "withBot" && player !== currentPlayer;
+
+  useEffect(() => {
+    if (isBotMove && !winner) {
+      const bot = player === "X" ? "O" : "X";
+      let nextSquares: (null | "X" | "O")[] = [];
+
+      switch (difficulty) {
+        case "simple":
+          nextSquares = calculateBotEasyMove(squares, bot);
+          break;
+        case "hard":
+          nextSquares = calculateBotEasyMove(squares, bot);
+          break;
+        default:
+          nextSquares = calculateBotMiddleMove(squares, bot);
+          break;
+      }
+
+      setTimeout(() => {
+        handlePlay(nextSquares);
+      }, 500);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPlayer, player]);
 
   function handleClick(i: number) {
+    if (isBotMove) {
+      return;
+    }
+
     if (squares[i] || winner) {
       return;
     }

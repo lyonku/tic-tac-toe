@@ -1,15 +1,12 @@
-#root {
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-}
-
 html {
   --primary-color: #d1d0c5;
   --secondary-color: #646669;
   --background-color: #323437;
   --background-color-transparent: #323437ea;
   --accent-color: #e2b714;
+
+  /* font-size: clamp(16px, 8px + 1vw, 20px); */
+  font-size: 20px;
 }
 
 html[data-theme="light"] {
@@ -30,19 +27,11 @@ body {
 
   background-color: var(--background-color);
   height: 100vh;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
-html {
-  font-size: clamp(16px, 8px + 1vw, 20px);
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 button {
-  cursor: pointer;
   padding: 0.625rem;
   border-radius: 0.5rem;
   background-color: unset;
@@ -51,8 +40,10 @@ button {
   font-size: 1.125rem;
 
   transition: 0.2s border;
+  overflow: hidden;
 
-  &:hover:not(.active) {
+  &:hover:not(.active):not(:disabled) {
+    cursor: pointer;
     border: 1px solid var(--primary-color);
   }
 

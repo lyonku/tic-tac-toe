@@ -8,40 +8,37 @@ interface GameStoreTypes {
   currentMove: number;
   winner: null | "O" | "X" | "XO";
   winline: any[];
-  players: ("X" | "O")[];
-  menu: "history" | "settings" | null;
+  player: "X" | "O";
 }
 
-const initialState: Omit<GameStoreTypes, "score" | "menu"> = {
+const initialState: Omit<GameStoreTypes, "score"> = {
   history: [Array(9).fill(null)],
-  players: ["X", "O"],
+  player: "X",
   currentMove: 0,
   winner: null,
   winline: [],
 };
 
-export const useGameStore = create<GameStoreTypes>()(
+const useGameStore = create<GameStoreTypes>()(
   devtools<GameStoreTypes>((set) => ({
     ...initialState,
     score: { X: 0, O: 0 },
-    menu: null,
   }))
 );
 
 export const useGameHistory = () => useGameStore((state) => state.history);
 export const useGameScore = () => useGameStore((state) => state.score);
+export const useGamePlayer = () => useGameStore((state) => state.player);
 export const useGameWinner = () =>
   useGameStore((state) => ({ winner: state.winner, winline: state.winline }));
 export const useGameCurrent = () =>
   useGameStore((state) => ({
     currentMove: state.currentMove,
     squares: state.history[state.currentMove],
-    currentPlayer:
-      state.currentMove % 2 === 0 ? state.players[0] : state.players[1],
+    currentPlayer: state.currentMove % 2 === 0 ? "X" : "O",
   }));
-export const useGameMenu = () => useGameStore((state) => state.menu);
 
-export const handlePlay = (nextSquares: any[]) => {
+export const handlePlay = (nextSquares: (null | "X" | "O")[]) => {
   const { history, currentMove } = useGameStore.getState();
   const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
   const [winner, winline] = calculateWinner(nextSquares);
@@ -76,22 +73,9 @@ export const jumpTo = (move: number) => {
 };
 
 export const choosePlayer = (player: "O" | "X") => {
-  const nextOrder: ("X" | "O")[] = [];
-  if (player === "X") {
-    nextOrder[0] = "X";
-    nextOrder[1] = "O";
-  } else {
-    nextOrder[0] = "O";
-    nextOrder[1] = "X";
-  }
-
-  useGameStore.setState({ players: nextOrder }, false, "game/choosePlayer");
+  useGameStore.setState({ player: player }, false, "game/choosePlayer");
 };
 
 export const restartGame = () => {
   useGameStore.setState({ ...initialState }, false, "game/restartGame");
-};
-
-export const setMenu = (state: "history" | "settings" | null) => {
-  useGameStore.setState({ menu: state }, false, "game/setMenu");
 };

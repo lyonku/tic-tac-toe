@@ -41,6 +41,8 @@
   }
 
   &__draw {
+    animation: zoom-draw 0.4s 0.3s;
+
     svg {
       width: 6.25rem;
       height: 6.25rem;
@@ -50,6 +52,15 @@
   @keyframes display-results {
     to {
       opacity: 1;
+    }
+  }
+
+  @keyframes zoom-draw {
+    from {
+      scale: 0.3;
+    }
+    to {
+      scale: 1;
     }
   }
 }

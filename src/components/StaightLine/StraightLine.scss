@@ -18,11 +18,11 @@
 
   &.vertical {
     &-left {
-      left: 48px;
+      left: 2.85rem;
     }
 
     &-right {
-      right: 48px;
+      right: 2.9rem;
     }
 
     &-center {
@@ -40,11 +40,11 @@
 
   &.horizontal {
     &-bottom {
-      bottom: 48px;
+      bottom: 2.85rem;
     }
 
     &-top {
-      top: 48px;
+      top: 2.9rem;
     }
 
     &-center {
@@ -52,6 +52,7 @@
       transform: translateY(-50%);
     }
   }
+
   &.diagonal-toRight,
   &.diagonal-toLeft {
     width: 0;

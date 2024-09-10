@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 
 import { location, positions } from "Constants";
-import { useGameWinner } from "useStore";
+import { useGameWinner } from "store/useGameStore";
 import MemoCross from "components/svgs/Cross";
 import MemoZero from "components/svgs/Zero";
 

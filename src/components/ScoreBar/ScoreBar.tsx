@@ -4,10 +4,11 @@ import {
   useGameCurrent,
   useGameScore,
   useGameWinner,
-} from "useStore";
+} from "store/useGameStore";
 import "./ScoreBar.scss";
 import MemoZero from "components/svgs/Zero";
 import MemoCross from "components/svgs/Cross";
+import { useSettingsMode } from "store/useSettingsStore";
 
 interface ScoreBarProps {}
 
@@ -15,6 +16,8 @@ const ScoreBar: FC<ScoreBarProps> = () => {
   const { currentPlayer, currentMove } = useGameCurrent();
   const { winner } = useGameWinner();
   const score = useGameScore();
+  const mode = useSettingsMode();
+  const isWithFriend = mode === "withFriend";
 
   const isCurrentPlayerX = currentPlayer === "X" && !winner;
   const isCurrentPlayerO = currentPlayer === "O" && !winner;
@@ -32,11 +35,12 @@ const ScoreBar: FC<ScoreBarProps> = () => {
 
   return (
     <div className="score-bar">
-      <div
+      <button
         className={`score-bar__cell ${isCurrentPlayerX ? "active" : ""} ${
-          winner === "X" ? "win" : ""
+          isXWin ? "win" : ""
         }`}
         onClick={() => handleChoosePlayer("X")}
+        disabled={isWithFriend}
       >
         <MemoCross />
         <span>{currentScoreX}</span>
@@ -45,13 +49,14 @@ const ScoreBar: FC<ScoreBarProps> = () => {
           src="/crown.svg"
           alt="корона"
         />
-      </div>
+      </button>
       <span>VS</span>
-      <div
+      <button
         className={`score-bar__cell ${isCurrentPlayerO ? "active" : ""} ${
-          winner === "O" ? "win" : ""
+          isOWin ? "win" : ""
         }`}
         onClick={() => handleChoosePlayer("O")}
+        disabled={isWithFriend}
       >
         <MemoZero />
         <span>{currentScoreO}</span>
@@ -60,7 +65,7 @@ const ScoreBar: FC<ScoreBarProps> = () => {
           src="/crown.svg"
           alt="корона"
         />
-      </div>
+      </button>
     </div>
   );
 };

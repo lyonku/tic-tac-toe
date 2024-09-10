@@ -1,11 +1,15 @@
 import { FC } from "react";
-import { useGameCurrent, useGameWinner } from "useStore";
+import { useGameCurrent, useGameWinner } from "store/useGameStore";
+import { useSettingsMode } from "store/useSettingsStore";
 
 interface StatusProps {}
 
 const Status: FC<StatusProps> = () => {
   const { currentPlayer, currentMove } = useGameCurrent();
   const { winner } = useGameWinner();
+  const mode = useSettingsMode();
+  const isWithFriend = mode === "withFriend";
+
   const isFirstMove = currentMove === 0;
 
   let status = "Начните игру или выберите игрока";
@@ -14,7 +18,7 @@ const Status: FC<StatusProps> = () => {
     status = "Игра окончена";
   }
 
-  if (!winner && !isFirstMove) {
+  if ((!winner && !isFirstMove) || (!winner && isWithFriend)) {
     status = "Ходит: " + currentPlayer;
   }
 

@@ -1,5 +1,6 @@
 import { FC } from "react";
-import { jumpTo, useGameHistory } from "useStore";
+import { jumpTo, useGameHistory } from "store/useGameStore";
+import "./History.scss";
 
 interface HistoryProps {}
 

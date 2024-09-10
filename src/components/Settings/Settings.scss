@@ -1,0 +1,65 @@
+.settings {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  &__mode {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+
+      img {
+        width: 40px;
+      }
+    }
+  }
+
+  &__difficulty {
+    &-wrap {
+      display: flex;
+      align-items: center;
+    }
+
+    img {
+      width: 3.125rem;
+    }
+
+    &-select {
+      width: 100%;
+    }
+  }
+
+  &__theme {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &-wrap {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    &-btn {
+      width: calc(50% - 5px);
+
+      &:last-child {
+        white-space: nowrap;
+        width: 100%;
+      }
+    }
+  }
+}

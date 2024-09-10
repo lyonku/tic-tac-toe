@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { useGameWinner } from "useStore";
+import { useGameWinner } from "store/useGameStore";
 import "./StraightLine.scss";
 import { positions } from "Constants";
 

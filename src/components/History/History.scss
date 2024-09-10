@@ -1,0 +1,31 @@
+.history {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  &__item {
+    list-style: none;
+    cursor: pointer;
+
+    &-move {
+      text-decoration: none;
+    }
+
+    &-description {
+      text-decoration: underline;
+    }
+  }
+
+  &.active {
+    transform: translateX(120%) translateY(-50%);
+    z-index: 2;
+  }
+}

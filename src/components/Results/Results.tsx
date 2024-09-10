@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useGameWinner } from "useStore";
+import { useGameWinner } from "store/useGameStore";
 import MemoZero from "components/svgs/Zero";
 import MemoCross from "components/svgs/Cross";
 import "./Results.scss";

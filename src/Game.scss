@@ -2,6 +2,8 @@
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
+  padding: 20px;
   color: var(--primary-color);
 
   &__wrap {
@@ -14,6 +16,7 @@
 
     background-color: var(--background-color);
     z-index: 3;
+    margin-right: -40px;
   }
 
   .status {
@@ -28,23 +31,22 @@
   gap: 1.25rem;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 900px) {
   .game {
-    margin-right: 20%;
+    height: 100dvh;
+    padding: 10px 10px 20px;
+
+    h1 {
+      margin: 0.5rem 0;
+    }
+
+    &__wrap {
+      margin-right: 0;
+    }
   }
 }
-
-@media screen and (max-width: 1000px) {
+@media screen and (max-height: 710px) {
   .game {
-    margin-right: 0;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .game {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 0;
+    height: auto;
   }
 }

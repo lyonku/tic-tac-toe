@@ -1,13 +1,13 @@
 import Board from "components/Board";
-import ScoreBar from "components/ScoreBar";
 import Status from "components/Status";
-import Results from "components/Results";
 import StraightLine from "components/StaightLine";
+import Controls from "components/Controls";
+import ScoreBar from "components/ScoreBar";
+import Results from "components/Results";
+import Menu from "components/Menu";
 
 import "./Game.scss";
 import "./Normalize.css";
-import Menu from "components/Menu";
-import Controls from "components/Controls";
 
 function Game() {
   return (

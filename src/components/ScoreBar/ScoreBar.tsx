@@ -1,12 +1,13 @@
 import { FC } from "react";
-import MemoCrossSVG from "./CrossSVG";
-import MemoZeroSVG from "./ZeroSVG";
 import {
   choosePlayer,
   useGameCurrent,
   useGameScore,
   useGameWinner,
 } from "useStore";
+import "./ScoreBar.scss";
+import MemoZero from "components/svgs/Zero";
+import MemoCross from "components/svgs/Cross";
 
 interface ScoreBarProps {}
 
@@ -23,12 +24,9 @@ const ScoreBar: FC<ScoreBarProps> = () => {
   const isOWin = score.O > score.X;
   const isFirstMove = currentMove === 0;
 
-  const handleChoosePlayer = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    const target = event.target as HTMLDivElement;
+  const handleChoosePlayer = (id: "X" | "O") => {
     if (isFirstMove) {
-      choosePlayer(target.id as "X" | "O");
+      choosePlayer(id);
     }
   };
 
@@ -38,10 +36,9 @@ const ScoreBar: FC<ScoreBarProps> = () => {
         className={`score-bar__cell ${isCurrentPlayerX ? "active" : ""} ${
           winner === "X" ? "win" : ""
         }`}
-        onClick={handleChoosePlayer}
-        id="X"
+        onClick={() => handleChoosePlayer("X")}
       >
-        <MemoCrossSVG />
+        <MemoCross />
         <span>{currentScoreX}</span>
         <img
           className={`score-bar__winner ${isXWin ? "active" : ""}`}
@@ -54,10 +51,9 @@ const ScoreBar: FC<ScoreBarProps> = () => {
         className={`score-bar__cell ${isCurrentPlayerO ? "active" : ""} ${
           winner === "O" ? "win" : ""
         }`}
-        onClick={handleChoosePlayer}
-        id="O"
+        onClick={() => handleChoosePlayer("O")}
       >
-        <MemoZeroSVG />
+        <MemoZero />
         <span>{currentScoreO}</span>
         <img
           className={`score-bar__winner ${isOWin ? "active" : ""}`}

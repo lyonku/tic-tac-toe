@@ -1,7 +1,9 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
+import ThemeProvider from "context/ThemeContext";
 import Game from "Game";
+
+import "./index.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -9,6 +11,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <StrictMode>
-    <Game />
+    <ThemeProvider>
+      <Game />
+    </ThemeProvider>
   </StrictMode>
 );

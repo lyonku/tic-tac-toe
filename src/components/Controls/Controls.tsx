@@ -1,6 +1,9 @@
 import { FC } from "react";
 import { restartGame, setMenu, useGameMenu } from "useStore";
 import "./Controls.scss";
+import MemoMenuIcon from "components/svgs/MenuIcon";
+import MemoHistoryIcon from "components/svgs/HistoryIcon";
+import MemoRestartIcon from "components/svgs/RestartIcon";
 
 interface ControlsProps {}
 
@@ -8,38 +11,32 @@ const Controls: FC<ControlsProps> = () => {
   const menu = useGameMenu();
   const isMenuOpen = menu !== null;
 
-  const handleMenuOpen = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    const target = event.target as HTMLDivElement;
-
-    if (menu === target.id && isMenuOpen) {
+  const handleMenuOpen = (id: "history" | "settings" | null) => {
+    if (menu === id && isMenuOpen) {
       setMenu(null);
     } else {
-      setMenu(target.id as "history" | "settings");
+      setMenu(id as "history" | "settings");
     }
   };
 
   return (
     <div className="controls">
       <button className="controls__restart-btn" onClick={restartGame}>
-        <img src="restart.svg" alt="" />
+        <MemoRestartIcon />
         <span>Начать заново</span>
       </button>
       <div className="controls__small-btns">
         <button
-          className="controls__history-btn"
-          onClick={handleMenuOpen}
-          id="history"
+          className="controls__small-btn controls__history-btn"
+          onClick={() => handleMenuOpen("history")}
         >
-          <img src="history.svg" alt="" id="history" />
+          <MemoHistoryIcon />
         </button>
         <button
-          className="controls__menu-btn"
-          onClick={handleMenuOpen}
-          id="settings"
+          className="controls__small-btn controls__menu-btn"
+          onClick={() => handleMenuOpen("settings")}
         >
-          <img src="menu.svg" alt="" id="settings" />
+          <MemoMenuIcon />
         </button>
       </div>
     </div>

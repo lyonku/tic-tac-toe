@@ -1,11 +1,11 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 
-interface ZeroSVGProps extends React.SVGProps<SVGSVGElement> {
+interface ZeroProps extends React.SVGProps<SVGSVGElement> {
   animate?: boolean;
 }
 
-function ZeroSVG({ animate, ...props }: ZeroSVGProps) {
+function Zero({ animate, ...props }: ZeroProps) {
   const circumference = 2 * Math.PI * 66.37;
   const [offset, setOffset] = useState(circumference);
 
@@ -40,5 +40,5 @@ function ZeroSVG({ animate, ...props }: ZeroSVGProps) {
   );
 }
 
-const MemoZeroSVG = React.memo(ZeroSVG);
-export default MemoZeroSVG;
+const MemoZero = React.memo(Zero);
+export default MemoZero;

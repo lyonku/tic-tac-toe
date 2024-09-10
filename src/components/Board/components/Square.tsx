@@ -1,9 +1,9 @@
 import { FC, useState } from "react";
 
 import { location, positions } from "Constants";
-import MemoZeroSVG from "components/ZeroSVG";
-import MemoCrossSVG from "components/CrossSVG";
 import { useGameWinner } from "useStore";
+import MemoCross from "components/svgs/Cross";
+import MemoZero from "components/svgs/Zero";
 
 interface SquareProps {
   value: string | null | number;
@@ -29,7 +29,7 @@ const Square: FC<SquareProps> = ({ value, onSquareClick, element }) => {
   switch (value) {
     case "O":
       component = (
-        <MemoZeroSVG
+        <MemoZero
           animate={true}
           className={` ${winSquare ? "win-square" : ""} ${positionClass} ${
             location[element]
@@ -39,7 +39,7 @@ const Square: FC<SquareProps> = ({ value, onSquareClick, element }) => {
       break;
     case "X":
       component = (
-        <MemoCrossSVG
+        <MemoCross
           animate={true}
           className={` ${winSquare ? "win-square" : ""} ${positionClass} ${
             location[element]

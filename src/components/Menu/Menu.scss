@@ -3,7 +3,7 @@
   max-width: 14rem;
   position: absolute;
   right: 0;
-  border: 1px solid #646669;
+  border: 1px solid var(--secondary-color);
   border-radius: 8px;
   padding: 20px;
 
@@ -28,7 +28,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #323437;
+    background-color: var(--background-color);
     opacity: 0.5;
 
     transition: 0.2s opacity !important;
@@ -37,7 +37,7 @@
       opacity: 1;
     }
 
-    img {
+    svg {
       width: 30px;
       height: 30px;
     }
@@ -92,43 +92,20 @@
     flex-direction: column;
     gap: 10px;
 
-    input {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
-      height: 0;
-      width: 0;
-    }
-
-    input:checked ~ &-btn {
-      border: 1px solid #e2b714;
-    }
-
     &-btn {
-      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
 
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #646669;
-
-      transition: 0.2s border;
-
       img {
         width: 40px;
-      }
-
-      &:hover {
-        border: 1px solid #d1d0c5;
       }
     }
   }
 
   &__difficulty {
-    label {
+    &-wrap {
       display: flex;
       align-items: center;
     }
@@ -154,32 +131,11 @@
       gap: 10px;
     }
 
-    input {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
-      height: 0;
-      width: 0;
-    }
-
-    input:checked ~ &-btn {
-      border: 1px solid #e2b714;
-    }
-
-    label {
-      width: calc(50% - 10px);
-    }
-
     &-btn {
-      width: 100%;
-      transition: 0.2s border;
-      cursor: pointer;
-      padding: 10px;
-      border: 1px solid #646669;
-      border-radius: 8px;
+      width: calc(50% - 5px);
 
-      &:hover {
-        border: 1px solid #d1d0c5;
+      &:last-child {
+        width: 100%;
       }
     }
   }

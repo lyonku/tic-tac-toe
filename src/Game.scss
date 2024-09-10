@@ -2,6 +2,7 @@
   position: relative;
   display: flex;
   align-items: center;
+  color: var(--primary-color);
 
   &__wrap {
     position: relative;
@@ -11,24 +12,8 @@
     align-items: center;
     gap: 2.5rem;
 
-    background-color: #323437;
+    background-color: var(--background-color);
     z-index: 3;
-  }
-
-  button {
-    cursor: pointer;
-    padding: 0.625rem;
-    border-radius: 0.5rem;
-    background-color: unset;
-    border: 1px solid #646669;
-    color: #d1d0c5;
-    font-size: 1.125rem;
-
-    transition: 0.2s border;
-
-    &:hover {
-      border: 1px solid #d1d0c5;
-    }
   }
 
   .status {
@@ -41,125 +26,6 @@
   flex-direction: column;
   align-items: center;
   gap: 1.25rem;
-
-  .score-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    width: 100%;
-    font-weight: 500;
-    font-size: 1.125rem;
-
-    &__cell {
-      position: relative;
-      cursor: pointer;
-
-      width: 100%;
-      padding: 0.5rem 1rem;
-      border: 1px solid #646669;
-      border-radius: 0.5rem;
-      transition: 0.2s border, 0.2s box-shadow;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      &.active {
-        border: 1px solid #e2b714;
-        box-shadow: 0.25rem 0.25rem 1.375rem 0px rgba(0, 0, 0, 0.2);
-      }
-
-      &.win {
-        animation: winner 1s;
-      }
-
-      svg {
-        min-width: 25px;
-      }
-    }
-
-    &__winner {
-      opacity: 0;
-      width: 3.125rem;
-      position: absolute;
-      top: -100%;
-      left: 50%;
-      transform: translateX(-50%);
-      transition: 0.3s opacity;
-
-      &.active {
-        opacity: 1;
-      }
-    }
-  }
-
-  @keyframes winner {
-    0%,
-    100% {
-      border: 1px solid #646669;
-    }
-    50% {
-      scale: 1.1;
-      border: 1px solid #4f9725;
-    }
-  }
-}
-
-.results {
-  z-index: -1;
-  opacity: 0;
-  top: 0;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: #323437ea;
-  backdrop-filter: blur(4px);
-
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  transition: 0.2s opacity;
-
-  &.draw {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.25rem;
-  }
-
-  &.active {
-    z-index: 1;
-    animation: display-results 0.4s;
-    animation-delay: 1.4s;
-    animation-fill-mode: forwards;
-
-    &.draw {
-      animation: display-results 0.4s;
-      animation-delay: 0.3s;
-      animation-fill-mode: forwards;
-    }
-  }
-
-  &__text {
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 1.875rem;
-    color: #e2b714;
-    margin-bottom: 5rem;
-  }
-
-  &__draw {
-    svg {
-      width: 6.25rem;
-      height: 6.25rem;
-    }
-  }
-
-  @keyframes display-results {
-    to {
-      opacity: 1;
-    }
-  }
 }
 
 @media screen and (max-width: 1200px) {

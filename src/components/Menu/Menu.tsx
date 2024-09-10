@@ -3,6 +3,7 @@ import { setMenu, useGameMenu } from "useStore";
 import Settings from "./components/Settings";
 import History from "./components/History";
 import "./Menu.scss";
+import MemoCrossIcon from "components/svgs/CrossIcon";
 
 interface MenuProps {}
 
@@ -26,7 +27,7 @@ const Menu: FC<MenuProps> = () => {
       default:
         setTimeout(() => {
           setComponent(null);
-        }, 300);
+        }, 200);
         break;
     }
   }, [menu]);
@@ -35,7 +36,7 @@ const Menu: FC<MenuProps> = () => {
     <div className={`menu ${isMenuOpen ? "active" : ""}`}>
       {component}
       <button className="menu__close-btn" onClick={closeMenu}>
-        <img src="cross.svg" alt="" />
+        <MemoCrossIcon />
       </button>
     </div>
   );

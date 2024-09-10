@@ -1,10 +1,5 @@
 import { FC } from "react";
-import {
-  handlePlay,
-  restartGame,
-  useGameCurrent,
-  useGameWinner,
-} from "useStore";
+import { handlePlay, useGameCurrent, useGameWinner } from "useStore";
 import Square from "./components/Square";
 import "./Board.scss";
 

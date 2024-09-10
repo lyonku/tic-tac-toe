@@ -1,0 +1,62 @@
+.score-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  font-weight: 500;
+  font-size: 1.125rem;
+
+  &__cell {
+    position: relative;
+    cursor: pointer;
+
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid #646669;
+    border-radius: 0.5rem;
+    transition: 0.2s border, 0.2s box-shadow;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &.active {
+      border: 1px solid #e2b714;
+      box-shadow: 0.25rem 5px 1.375rem 0px rgba(0, 0, 0, 0.1);
+    }
+
+    &.win {
+      animation: winner 1s;
+    }
+
+    svg {
+      min-width: 25px;
+    }
+  }
+
+  &__winner {
+    opacity: 0;
+    width: 3.125rem;
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: 0.3s opacity;
+
+    &.active {
+      opacity: 1;
+    }
+  }
+}
+
+@keyframes winner {
+  0%,
+  100% {
+    border: 1px solid var(--secondary-color);
+  }
+  50% {
+    scale: 1.1;
+    border: 1px solid #4f9725;
+  }
+}

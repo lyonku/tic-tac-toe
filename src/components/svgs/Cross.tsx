@@ -1,11 +1,11 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 
-interface CrossSVGProps extends React.SVGProps<SVGSVGElement> {
+interface CrossProps extends React.SVGProps<SVGSVGElement> {
   animate?: boolean;
 }
 
-function CrossSVG({ animate, ...props }: CrossSVGProps) {
+function Cross({ animate, ...props }: CrossProps) {
   const lineLength = 127.1 * Math.sqrt(2);
   const [offset, setOffset] = useState(lineLength);
 
@@ -56,5 +56,5 @@ function CrossSVG({ animate, ...props }: CrossSVGProps) {
   );
 }
 
-const MemoCrossSVG = React.memo(CrossSVG);
-export default MemoCrossSVG;
+const MemoCross = React.memo(Cross);
+export default MemoCross;

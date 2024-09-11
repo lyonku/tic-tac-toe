@@ -113,7 +113,8 @@ export function calculateBotHardMove(
   // Если занята одна из центральных сторон, бот занимает соседнюю
   if (currentMove === 1) {
     let firstMoveIndex = getFirstMoveIndex(squares, player);
-    if (firstMoveIndex !== null && firstMoveIndex) {
+
+    if (firstMoveIndex !== null && firstMoveIndex !== undefined) {
       index = firstMoveIndex;
     }
   }

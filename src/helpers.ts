@@ -1,7 +1,7 @@
 type Square = "X" | "O";
-type NullableSquare = Square | null | "XO";
 type WinLine = [number, number, number];
 type WinnerResult = [Square | "XO", WinLine] | ["XO"] | [null];
+type SquaresType = (Square | null)[];
 
 const winlines: WinLine[] = [
   [0, 1, 2],
@@ -14,7 +14,7 @@ const winlines: WinLine[] = [
   [2, 4, 6],
 ];
 
-export function calculateWinner(squares: NullableSquare[]): WinnerResult {
+export function calculateWinner(squares: SquaresType): WinnerResult {
   for (let i = 0; i < winlines.length; i++) {
     const [a, b, c] = winlines[i];
 
@@ -35,7 +35,7 @@ function randomInteger(min: number, max: number): number {
   return Math.floor(rand);
 }
 
-function getRandomMove(nextSquares: (null | "X" | "O")[]): number {
+function getRandomMove(nextSquares: SquaresType): number {
   const num = randomInteger(0, 8);
 
   if (nextSquares[num]) {
@@ -45,7 +45,7 @@ function getRandomMove(nextSquares: (null | "X" | "O")[]): number {
   }
 }
 
-function getStrike(board: NullableSquare[], player: Square) {
+function getStrike(board: SquaresType, player: Square) {
   for (const line of winlines) {
     const [a, b, c] = line;
 
@@ -61,10 +61,7 @@ function getStrike(board: NullableSquare[], player: Square) {
   }
   return null;
 }
-export function calculateBotEasyMove(
-  squares: (null | "X" | "O")[],
-  bot: Square
-) {
+export function calculateBotEasyMove(squares: SquaresType, bot: Square) {
   const nextSquares = squares.slice();
 
   // Бот просто выбирает случайную свободную ячейку.
@@ -74,10 +71,7 @@ export function calculateBotEasyMove(
   return nextSquares;
 }
 
-export function calculateBotMiddleMove(
-  squares: (null | "X" | "O")[],
-  bot: Square
-) {
+export function calculateBotMiddleMove(squares: SquaresType, bot: Square) {
   const nextSquares = squares.slice();
 
   // Бот пытается выиграть, если есть возможность.
@@ -100,7 +94,7 @@ export function calculateBotMiddleMove(
 }
 
 export function calculateBotHardMove(
-  squares: (null | "X" | "O")[],
+  squares: SquaresType,
   bot: Square,
   currentMove: number
 ) {
@@ -108,6 +102,7 @@ export function calculateBotHardMove(
   const player = bot === "O" ? "X" : "O";
 
   let index: number | null = 0;
+  // Если нет других возможностей, бот делает случайный ход.
   index = getRandomMove(nextSquares);
 
   // Если центр не занят, бот сразу его занимает
@@ -117,41 +112,24 @@ export function calculateBotHardMove(
 
   // Если занята одна из центральных сторон, бот занимает соседнюю
   if (currentMove === 1) {
-    let firstMovePlayer = nextSquares.findIndex((square) => square === player);
-
-    if (firstMovePlayer === 1) {
-      index = 2;
-    }
-
-    if (firstMovePlayer === 3) {
-      index = 6;
-    }
-
-    if (firstMovePlayer === 5 || firstMovePlayer === 7) {
-      index = 8;
-    }
-
-    if (firstMovePlayer === 4) {
-      const randomEven = Math.floor(Math.random() * 5) * 2;
-      index = randomEven !== 4 ? randomEven : 2;
+    let firstMoveIndex = getFirstMoveIndex(squares, player);
+    if (firstMoveIndex !== null && firstMoveIndex) {
+      index = firstMoveIndex;
     }
   }
 
+  // Если игроком занят центр и угол, то бот займет любой другой угол
   if (
     currentMove === 3 &&
     nextSquares[4] === player &&
-    (nextSquares[0] === player ||
-      nextSquares[2] === player ||
-      nextSquares[6] === player ||
-      nextSquares[8] === player)
+    hasCornerOccupied(nextSquares, player)
   ) {
-    if (nextSquares[0] === null) {
-      index = 0;
-    } else if (nextSquares[2] === null) {
-      index = 2;
-    } else {
-      index = 8;
-    }
+    index = getFreeCornerIndex(nextSquares);
+  }
+
+  // Если бот в центре а игрок пытается занять углы, бот будет занимать центры сторон
+  if (currentMove === 3 && nextSquares[4] === bot) {
+    index = getFreeSideIndex(nextSquares);
   }
 
   // Бот пытается заблокировать ход игрока.
@@ -169,4 +147,48 @@ export function calculateBotHardMove(
   nextSquares[index] = bot;
 
   return nextSquares;
+}
+
+function getRandomEven() {
+  const evens = [0, 2, 6, 8];
+  return evens[Math.floor(Math.random() * evens.length)];
+}
+
+function getFreeSideIndex(squares: SquaresType) {
+  const sides = [1, 3, 5, 7];
+  return sides.find((index) => squares[index] === null) as number;
+}
+
+function getFreeCornerIndex(squares: SquaresType) {
+  const corners = [0, 2, 6, 8];
+  return corners.find((index) => squares[index] === null) as number;
+}
+
+function hasCornerOccupied(squares: SquaresType, player: Square) {
+  return [0, 2, 6, 8].some((index) => squares[index] === player);
+}
+
+function getFirstMoveIndex(squares: SquaresType, player: Square) {
+  let firstMovePlayer = squares.findIndex((square) => square === player);
+
+  switch (firstMovePlayer) {
+    case 1:
+      return 2;
+    case 3:
+      return 6;
+    case 5:
+      return 8;
+    case 7:
+      return 8;
+    case 4:
+      return getRandomEven();
+    default:
+      break;
+  }
+}
+
+export function vibrate(ms: number) {
+  if ("vibrate" in navigator) {
+    navigator.vibrate(ms);
+  }
 }

@@ -12,6 +12,7 @@ import {
   calculateBotEasyMove,
   calculateBotHardMove,
   calculateBotMiddleMove,
+  vibrate,
 } from "helpers";
 
 interface BoardProps {}
@@ -44,6 +45,7 @@ const Board: FC<BoardProps> = () => {
 
       setTimeout(() => {
         handlePlay(nextSquares);
+        vibrate(5);
       }, 500);
     }
 
@@ -63,6 +65,7 @@ const Board: FC<BoardProps> = () => {
     nextSquares[i] = currentPlayer as "X" | "O" | null;
 
     handlePlay(nextSquares);
+    vibrate(5);
   }
 
   const boardElements = [

@@ -1,5 +1,5 @@
 ## Available URL:
-https://lyonku-tic-tac-toe.netlify.app/
+https://tic-tac-toe.lyonku.ru/
 
 # Getting Started with Create React App
 
